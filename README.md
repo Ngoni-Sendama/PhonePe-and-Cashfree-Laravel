@@ -6,8 +6,7 @@
 
 add the api details in your .env
 
-```bash
-php
+```php
 PhonePe_MERCHANT_ID=your_merchant_id_here
 PhonePe_SALT_KEY=your_salt_key_here
 ```
