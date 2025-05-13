@@ -16,7 +16,7 @@ class PhonePeTestController extends Controller
         $amountInPaise = (int) ($request->amount * 100); // Convert rupees to paise
 
         $data = [
-            'merchantId' => env('MERCHANT_ID'), // Production merchant ID
+            'merchantId' => env('PhonePe_MERCHANT_ID'), // Production merchant ID
             'merchantTransactionId' => uniqid(),
             'merchantUserId' => 'MUID124',
             'amount' => $amountInPaise,
@@ -31,7 +31,7 @@ class PhonePeTestController extends Controller
 
         $encode = base64_encode(json_encode($data));
 
-        $saltKey = env('SALT_KEY'); // Production salt key
+        $saltKey = env('PhonePe_SALT_KEY'); // Production salt key
         $saltIndex = 1;
 
         $string = $encode . '/pg/v1/pay' . $saltKey;
@@ -67,7 +67,7 @@ class PhonePeTestController extends Controller
     {
         $input = $request->all();
 
-        $saltKey = env('SALT_KEY');
+        $saltKey = env('PhonePe_SALT_KEY');
         $saltIndex = 1;
 
         $finalXHeader = hash('sha256', '/pg/v1/status/' . $input['merchantId'] . '/' . $input['transactionId'] . $saltKey) . '###' . $saltIndex;
